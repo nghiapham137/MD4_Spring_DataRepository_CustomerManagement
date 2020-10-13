@@ -1,17 +1,28 @@
 package controller;
 
+import com.sun.org.apache.xalan.internal.xslt.Process;
 import model.Customer;
+import model.Province;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import service.CustomerService;
+import service.ProvinceService;
 
 @Controller
 @RequestMapping("/customers")
 public class CustomerController {
     @Autowired
     private CustomerService customerService;
+
+    @Autowired
+    private ProvinceService provinceService;
+
+    @ModelAttribute("provinces")
+    public Iterable<Province> provinces() {
+        return provinceService.findAll();
+    }
 
     @GetMapping("")
     public String home(Model model) {
@@ -27,9 +38,10 @@ public class CustomerController {
     }
 
     @PostMapping("/create")
-    public String saveCustomer(Customer customer){
+    public String saveCustomer(@ModelAttribute("customer") Customer customer, Model model){
         customerService.save(customer);
-        return "redirect:/customers";
+        model.addAttribute("customer", new Customer());
+        return "customer/create";
     }
 
     @GetMapping("/edit/{id}")

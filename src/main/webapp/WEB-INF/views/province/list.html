@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Province List</title>
@@ -10,12 +10,14 @@
     <table border="1">
         <tr>
             <th>Name</th>
+            <th>View</th>
             <th>Edit</th>
             <th>Delete</th>
         </tr>
         <th:block th:each="province:${provinces}">
             <tr>
                 <td th:text="${province.name}"></td>
+                <td><a th:href="@{'/provinces/view/' + ${province.id}}">View</a> </td>
                 <td><a th:href="@{'/provinces/edit/' + ${province.id}}">Edit</a> </td>
                 <td><a th:href="@{'/provinces/delete/' + ${province.id}}">Delete</a> </td>
             </tr>

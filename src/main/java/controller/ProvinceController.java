@@ -1,16 +1,21 @@
 package controller;
 
+import model.Customer;
 import model.Province;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import service.CustomerService;
 import service.ProvinceService;
 @RequestMapping("/provinces")
 @Controller
 public class ProvinceController {
     @Autowired
     private ProvinceService provinceService;
+
+    @Autowired
+    private CustomerService customerService;
 
     @GetMapping
     public String listProvince(Model model) {
@@ -70,7 +75,18 @@ public class ProvinceController {
         return "redirect:/provinces";
     }
 
-
+    @GetMapping("/view/{id}")
+    public String viewProvince(@PathVariable("id") Long id, Model model) {
+        Province province = provinceService.findById(id);
+        if (province != null) {
+            Iterable<Customer> customers = customerService.findAllByProvince(province);
+            model.addAttribute("province", province);
+            model.addAttribute("customers", customers);
+            return "/province/view";
+        }else {
+            return "error404";
+        }
+    }
 
 
 }

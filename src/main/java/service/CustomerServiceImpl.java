@@ -1,6 +1,7 @@
 package service;
 
 import model.Customer;
+import model.Province;
 import org.springframework.beans.factory.annotation.Autowired;
 import repository.CustomerRepository;
 
@@ -27,6 +28,11 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void remove(Long id) {
         customerRepository.delete(id);
+    }
+
+    @Override
+    public Iterable<Customer> findAllByProvince(Province province) {
+        return customerRepository.findAllByProvince(province);
     }
 
 

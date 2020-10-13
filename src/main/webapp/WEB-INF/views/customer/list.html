@@ -12,6 +12,7 @@
             <td>ID</td>
             <td>First Name</td>
             <td>Last Name</td>
+            <td>Province</td>
             <td></td>
             <td></td>
         </tr>
@@ -20,6 +21,7 @@
             <td th:text="${customer.id}"></td>
             <td th:text="${customer.firstName}"></td>
             <td th:text="${customer.lastName}"></td>
+            <td th:text="${customer.province.name}"></td>
             <td><a th:href="@{'/customers/edit/' + ${customer.id}}">Edit</a> </td>
             <td><a th:href="@{'/customers/delete/' + ${customer.id}}">Delete</a> </td>
         </tr>

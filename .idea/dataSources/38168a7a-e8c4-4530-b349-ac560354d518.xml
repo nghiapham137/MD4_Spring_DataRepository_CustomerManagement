@@ -980,49 +980,57 @@ SELECT|sys.sys_config:null
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <key id="307" parent="300" name="PRIMARY">
+    <column id="307" parent="300" name="province_id">
+      <Position>4</Position>
+      <DataType>bigint|0s</DataType>
+    </column>
+    <index id="308" parent="300" name="FK294was9ua9ahf44gwo41w6mct">
+      <ColNames>province_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="309" parent="300" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="308" parent="301" name="next_val">
+    <column id="310" parent="301" name="next_val">
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
     </column>
-    <column id="309" parent="302" name="id">
+    <column id="311" parent="302" name="id">
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="310" parent="302" name="name">
+    <column id="312" parent="302" name="name">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <key id="311" parent="302" name="PRIMARY">
+    <key id="313" parent="302" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="312" parent="303" name="Province_id">
+    <column id="314" parent="303" name="Province_id">
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="313" parent="303" name="customers_id">
+    <column id="315" parent="303" name="customers_id">
       <Position>2</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="314" parent="303" name="UK_nv49ms0be1s4tv37iv77svg3y">
+    <index id="316" parent="303" name="UK_nv49ms0be1s4tv37iv77svg3y">
       <ColNames>customers_id</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <index id="315" parent="303" name="FK8qvqso82wcxmby7cpx964gj8k">
+    <index id="317" parent="303" name="FK8qvqso82wcxmby7cpx964gj8k">
       <ColNames>Province_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="316" parent="303" name="UK_nv49ms0be1s4tv37iv77svg3y">
+    <key id="318" parent="303" name="UK_nv49ms0be1s4tv37iv77svg3y">
       <ColNames>customers_id</ColNames>
       <UnderlyingIndexName>UK_nv49ms0be1s4tv37iv77svg3y</UnderlyingIndexName>
     </key>

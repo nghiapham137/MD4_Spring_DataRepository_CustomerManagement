@@ -12,6 +12,13 @@
         <input id="firtsname" type="text" th:field="*{firstName}">
         <label for="lastname">Last Name</label>
         <input id="lastname" type="text" th:field="*{lastName}">
+        <label for="province">Province</label>
+        <select id="province" name="province">
+            <option th:each="p:${provinces}"
+             th:value="${p.id}"
+            th:text="${p.name}"
+            th:selected="(${p.id}==*{province.id})"></option>
+        </select>
         <input type="submit" value="Save">
     </form>
 
