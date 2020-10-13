@@ -4,11 +4,16 @@ import com.sun.org.apache.xalan.internal.xslt.Process;
 import model.Customer;
 import model.Province;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import service.CustomerService;
 import service.ProvinceService;
+
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/customers")
@@ -25,8 +30,13 @@ public class CustomerController {
     }
 
     @GetMapping("")
-    public String home(Model model) {
-        Iterable<Customer> customers = customerService.findAll();
+    public String home(@PageableDefault(size = 10) Pageable pageable, @RequestParam("s") Optional<String> s, Model model) {
+        Page<Customer> customers;
+        if (s.isPresent()) {
+            customers = customerService.findAllByFirstNameContaining(s.get(), pageable);
+        }else {
+            customers = customerService.findAll(pageable);
+        }
         model.addAttribute("customers", customers);
         return "customer/list";
     }
@@ -52,9 +62,9 @@ public class CustomerController {
     }
 
     @PostMapping("/edit")
-    public String updateCustomer(Customer customer, Model model){
+    public String updateCustomer(Pageable pageable,Customer customer, Model model){
         customerService.save(customer);
-        Iterable<Customer>customers = customerService.findAll();
+        Page<Customer>customers = customerService.findAll(pageable);
         model.addAttribute("customers", customers);
         return "redirect:/customers";
     }
